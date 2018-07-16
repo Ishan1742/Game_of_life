@@ -1,5 +1,7 @@
 package gui.components;
 
+import data.Cell;
+import data.CellsContainer;
 import data.GraphicSection;
 
 import javax.swing.*;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 
 public class DrawingPanel extends JPanel implements MouseMotionListener, MouseListener {
 
+    private CellsContainer cells;
     private ArrayList<GraphicSection> sections;
 
     private int dimension;
@@ -26,6 +29,7 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
         setPreferredSize(new Dimension(dimension, dimension));
         setBackground(Color.WHITE);
 
+        this.cells = new CellsContainer(count);
         this.sections = new ArrayList<>();
         generateSections();
 
@@ -43,7 +47,8 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
 
         for (int i = 0; i < sections.size(); i++) {
             GraphicSection s = sections.get(i);
-
+            Cell cell = cells.getCells().get(i);
+            s.setCell(cell);
         }
     }
 
@@ -81,6 +86,14 @@ public class DrawingPanel extends JPanel implements MouseMotionListener, MouseLi
                 g.fillRect(s.getX() + 1, s.getY() + 1, s.getSize() - 1, s.getSize() - 1);
         }
 
+    }
+
+    public CellsContainer getCells() {
+        return cells;
+    }
+
+    public void setAllowPainting(boolean allowPainting) {
+        this.allowPainting = allowPainting;
     }
 
     @Override

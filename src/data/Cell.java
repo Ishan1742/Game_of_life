@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class Cell {
     private boolean active;
-    private ArrayList<Cell> neighbours;
+    private ArrayList<Cell> neighbours; //Creating arraylist of Cells
 
-    public Cell()
+    public Cell() // constructor
     {
         this.active = false;
         this.neighbours = new ArrayList<>();
